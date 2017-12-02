@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 import './App.css';
-import './style.less'
+import './style.less';
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider } = Layout;
 
 class App extends Component {
   state = {
     collapsed: false,
     iconStyle: {
-      fontSize: 16
-    }
+      fontSize: 16,
+    },
   }
   render() {
-    let iconStyle = this.state.iconStyle;
-    let collapsed = this.state.collapsed;
+    const { iconStyle, collapsed } = this.state;
     return (
       <Layout>
-        <Sider 
-          trigger={null} 
+        <Sider
+          trigger={null}
           collapsed={collapsed}
-          style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }}
+          style={{
+            overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
+            left: 0,
+          }}
         >
           <div className="logo" />
           <Menu
