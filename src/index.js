@@ -7,9 +7,11 @@ import App from './pages/App';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-<Router>
-  <div>
-    <Route exact path="/" component={ App } ></Route>
-  </div>
-</Router>, document.getElementById('root'));
+  <Router>
+    <div>
+      <Route exact path="/" component={App} />
+    </div>
+  </Router>,
+  document.getElementById('root'),
+);
 registerServiceWorker();

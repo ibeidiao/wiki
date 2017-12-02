@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Link } from 'react-router-dom';
+// import { BrowserRouter as Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 import './App.css';
@@ -35,22 +35,20 @@ class App extends Component {
           >
             <Menu.Item key="1">
               <Icon type="home" style={iconStyle} />
-              <Link to="/home">Home</Link>
+              {/* <Link to="/home">Home</Link> */}
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="user" style={iconStyle} />
-              <Link to="/user">User</Link>
+              {/* <Link to="/user">User</Link> */}
             </Menu.Item>
             <Menu.Item key="3">
               <Icon type="area-chart" style={iconStyle} />
-              <Link to="/chart">Chart</Link>
+              {/* <Link to="/chart">Chart</Link> */}
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout>
-          <Header>
-
-          </Header>
+          <Header />
         </Layout>
       </Layout>
     );

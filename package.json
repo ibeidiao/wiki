@@ -46,7 +46,10 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "precommit": "npm run test-eslint",
+    "prepush": "npm run test-eslint",
+    "lint": "./node_module/eslint/bin/eslint.js src/ --fix"
   },
   "jest": {
     "collectCoverageFrom": [
