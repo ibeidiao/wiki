@@ -49,7 +49,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "precommit": "npm run lint",
     "prepush": "npm run lint",
-    "lint": "./node_modules/eslint/bin/eslint.js src/ --fix"
+    "lint": "./node_modules/eslint/bin/eslint.js src/**/*.js src/**/*.jsx src/*.js src/*.jsx"
   },
   "jest": {
     "collectCoverageFrom": [
