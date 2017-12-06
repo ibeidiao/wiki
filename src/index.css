@@ -3,3 +3,9 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+@font-face {
+  font-family: 'Italiana';
+  font-style: normal;
+  src: url('http://fonts.gstatic.com/s/italiana/v5/LfYaHQ4Rk7tkyzfelQ0U63YhjbSpvc47ee6xR_80Hnw.woff2');
+}
