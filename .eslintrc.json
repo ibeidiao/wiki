@@ -7,7 +7,8 @@
     "es6": true
   },
   "globals": {
-    "it": true
+    "it": true,
+    "expect": true
   },
   "rules": {
     "arrow-body-style": [0],
