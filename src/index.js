@@ -15,11 +15,12 @@ ReactDOM.render(
       <Route
         exact
         path="/"
-        render={() => {
+        render={() => (
           <Redirect to={{
-            pathname: "/main"
-          }}/>
-        }}
+            pathname: '/main',
+          }}
+          />
+        )}
       />
       <Route path="/main" component={App} />
       <Route path="/login" component={Login} />

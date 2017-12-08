@@ -38,7 +38,7 @@ class App extends Component {
         <Layout>
           <Header />
           <Content>
-            <Route path="projects" component={Projects} />
+            <Route path="/projects" component={Projects} />
           </Content>
           <Footer />
         </Layout>
