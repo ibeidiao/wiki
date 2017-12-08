@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
-import { Layout, Avatar, Dropdown, Menu } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
+
+import DropdownAvatar from '../../../components/DropdownAvatar/DropdownAvatar';
 
 import './header.less';
 
 const { Header } = Layout;
 
 class HeaderWrap extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      a: true,
+    };
+  }
+
+  handleMenuCilck = () => {
+    console.log(111);
+    this.state.a = !this.state.a;
+  }
+
   render() {
     const menu = (
-      <Menu>
+      <Menu style={{ textAlign: 'center' }}>
         <Menu.Item>
           <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">个人信息</a>
         </Menu.Item>
@@ -21,11 +36,16 @@ class HeaderWrap extends Component {
         </Menu.Item>
       </Menu>
     );
+    const iconType = this.state.a ? 'menu-unfold' : 'menu-fold';
+
     return (
       <Header className="header">
-        <Dropdown overlay={menu} placement="bottomRight">
-          <Avatar style={{ verticalAlign: 'middle' }} size="large" icon="user">USER</Avatar>
-        </Dropdown>
+        <div className="action">
+          <Icon onClick={this.handleMenuCilck} type={iconType} style={{ fontSize: '24px', verticalAlign: 'middle' }} />
+        </div>
+        <div className="right">
+          <DropdownAvatar menu={menu} placement="bottomRight" className="action" size="small" icon="user" username="User" />
+        </div>
       </Header>
     );
   }

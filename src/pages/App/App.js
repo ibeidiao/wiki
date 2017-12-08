@@ -13,27 +13,32 @@ const {
 
 const {
   Header,
-  MySider,
+  Sider,
 } = MyLayout;
 
-const Projects = (
+const Projects = () => (
   <div>
     This is Project.
   </div>
 );
 
 class App extends Component {
-  state = {
-    siderCollapsed: true,
+  constructor() {
+    super();
+
+    this.state = {
+      siderCollapsed: true,
+    };
   }
+
   render() {
     return (
       <Layout>
-        <MySider collapsed={this.state.siderCollapsed} />
+        <Sider collapsed={this.state.siderCollapsed} />
         <Layout>
           <Header />
           <Content>
-            <Route path="/projects" component={Projects} />
+            <Route path="projects" component={Projects} />
           </Content>
           <Footer />
         </Layout>

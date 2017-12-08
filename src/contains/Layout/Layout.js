@@ -2,11 +2,11 @@
 // import React, { Component } from 'react';
 
 import Header from './Header/Header';
-import MySider from './Sider/Sider';
+import Sider from './Sider/Sider';
 
 const Layout = {
   Header,
-  MySider,
+  Sider,
 };
 
 export default Layout;
