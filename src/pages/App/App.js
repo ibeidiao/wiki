@@ -24,12 +24,18 @@ class App extends Component {
     };
   }
 
+  handleMenuControl = () => {
+    this.setState({
+      siderCollapsed: !this.state.siderCollapsed,
+    });
+  }
+
   render() {
     return (
       <Layout>
         <Sider collapsed={this.state.siderCollapsed} />
         <Layout>
-          <Header />
+          <Header collapsed={this.state.siderCollapsed} onMenuControl={this.handleMenuControl} />
           <Content>页面内容</Content>
           <Footer />
         </Layout>
