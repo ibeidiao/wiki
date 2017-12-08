@@ -2,74 +2,76 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
+import MyLayout from '../../contains/Layout/Layout';
 import Logo from '../../components/Logo/Logo';
 
-import './App.css';
-import './style.less';
+import './app.less';
 
-const { Header, Sider, Content } = Layout;
+const {
+  Sider,
+  Content,
+  Footer,
+} = Layout;
+
+const {
+  Header,
+} = MyLayout;
 
 class App extends Component {
   state = {
     collapsed: false,
-    iconStyle: {
-      fontSize: 16,
-    },
+    // iconStyle: {
+    //   fontSize: 16,
+    // },
     logoStyle: {
       color: '#fff',
       font: '40px "Italiana", sans-serif',
       textAlign: 'center',
-      height: '72px',
-      lineHeight: '72px',
+      height: '64px',
+      lineHeight: '64px',
+      backgroundColor: '#002140',
     },
   }
   render() {
     const { iconStyle, collapsed, logoStyle } = this.state;
+
     return (
       <Layout>
-        <Layout>
-
-          <Sider
-            trigger={null}
-            collapsed={collapsed}
+        <Sider
+          trigger={null}
+          collapsed={collapsed}
+          width="240"
+          style={{
+            overflow: 'auto',
+            height: '100vh',
+          }}
+          className="sider"
+        >
+          <Logo title="wiki" style={logoStyle} />
+          <Menu
+            theme="dark"
             style={{
-              overflow: 'auto',
-              height: '100vh',
-              position: 'fixed',
-              left: 0,
+              margin: '16px 0',
+              lineHeight: '64px',
+              height: 'calc(100% - 96px)',
             }}
           >
-            <Logo title="wiki" style={logoStyle} />
-            <Menu
-              theme="dark"
-              style={{ lineHeight: '64px', height: 'calc(100% - 64px)' }}
-            >
-              <Menu.Item key="1" title="home">
-                <Icon type="user" style={iconStyle} />
-                个人资料
-                <Link to="/login" href="/login" />
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Icon type="lock" style={iconStyle} />
-                修改密码
-                <Link to="/login" href="/login" />
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Icon type="database" style={iconStyle} />
-                项目列表
-                <Link to="/login" href="/login" />
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Icon type="team" style={iconStyle} />
-                用户管理
-                <Link to="/login" href="/login" />
-              </Menu.Item>
-            </Menu>
-          </Sider>
-        </Layout>
+            <Menu.Item key="3" style={{ padding: '0 24px' }}>
+              <Icon type="database" style={iconStyle} />
+              项目列表
+              <Link to="/login" href="/login" />
+            </Menu.Item>
+            <Menu.Item key="4" style={{ padding: '0 24px' }}>
+              <Icon type="team" style={iconStyle} />
+              用户管理
+              <Link to="/login" href="/login" />
+            </Menu.Item>
+          </Menu>
+        </Sider>
         <Layout>
           <Header />
-          <Content />
+          <Content>页面内容</Content>
+          <Footer />
         </Layout>
       </Layout>
     );

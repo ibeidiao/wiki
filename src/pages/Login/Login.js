@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Logo from '../../components/Logo/Logo';
-import LoginForm from '../LoginForm/LoginForm';
+import LoginForm from '../../contains/LoginForm/LoginForm';
 
 import './login.less';
 
