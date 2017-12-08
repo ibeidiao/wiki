@@ -48,7 +48,7 @@ class MySider extends Component {
             <span>
               项目列表
             </span>
-            <Link to="/login" href="/login" />
+            <Link to="/projects" href="/projects" />
           </Menu.Item>
           <Menu.Item key="4" style={{ padding: '0 24px' }}>
             <Icon type="team" />

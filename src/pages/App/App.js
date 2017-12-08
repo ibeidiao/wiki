@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Layout } from 'antd';
+import { Route } from 'react-router-dom';
 
 import MyLayout from '../../contains/Layout/Layout';
 
@@ -15,6 +16,12 @@ const {
   MySider,
 } = MyLayout;
 
+const Projects = (
+  <div>
+    This is Project.
+  </div>
+);
+
 class App extends Component {
   state = {
     siderCollapsed: true,
@@ -25,7 +32,9 @@ class App extends Component {
         <MySider collapsed={this.state.siderCollapsed} />
         <Layout>
           <Header />
-          <Content>页面内容</Content>
+          <Content>
+            <Route path="/projects" component={Projects} />
+          </Content>
           <Footer />
         </Layout>
       </Layout>
