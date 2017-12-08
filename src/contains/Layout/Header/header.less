@@ -1,5 +1,22 @@
 
 .header {
-  text-align: right;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  .right {
+    float: right;
+    height: 100%;
+    .action {
+      span {
+        margin-right: 8px;
+      }
+    }
+  }
+  .action {
+    display: inline-block;
+    height: 100%;
+    padding: 0 12px;
+    cursor: pointer;
+    &:hover {
+      background: #e6f7ff;
+    }
+  }
 }

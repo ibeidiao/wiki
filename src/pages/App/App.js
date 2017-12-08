@@ -12,17 +12,22 @@ const {
 
 const {
   Header,
-  MySider,
+  Sider,
 } = MyLayout;
 
 class App extends Component {
-  state = {
-    siderCollapsed: true,
+  constructor() {
+    super();
+
+    this.state = {
+      siderCollapsed: true,
+    };
   }
+
   render() {
     return (
       <Layout>
-        <MySider collapsed={this.state.siderCollapsed} />
+        <Sider collapsed={this.state.siderCollapsed} />
         <Layout>
           <Header />
           <Content>页面内容</Content>

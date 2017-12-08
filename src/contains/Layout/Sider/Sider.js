@@ -8,7 +8,7 @@ const {
   Sider,
 } = Layout;
 
-class MySider extends Component {
+class SiderWrap extends Component {
   state = {
     logoStyle: {
       color: '#fff',
@@ -34,7 +34,7 @@ class MySider extends Component {
         }}
         className="sider"
       >
-        <Logo title="wiki" style={logoStyle} />
+        <Logo title={collapsed ? 'w' : 'wiki'} style={logoStyle} />
         <Menu
           theme="dark"
           style={{
@@ -63,4 +63,4 @@ class MySider extends Component {
   }
 }
 
-export default MySider;
+export default SiderWrap;
