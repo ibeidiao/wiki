@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Dropdown } from 'antd';
 
-
 class DropdownAvatar extends Component {
   static propTypes = {
     menu: PropTypes.object.isRequired,

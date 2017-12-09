@@ -16,26 +16,12 @@ const {
 } = MyLayout;
 
 class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      siderCollapsed: true,
-    };
-  }
-
-  handleMenuControl = () => {
-    this.setState({
-      siderCollapsed: !this.state.siderCollapsed,
-    });
-  }
-
   render() {
     return (
       <Layout>
-        <Sider collapsed={this.state.siderCollapsed} />
+        <Sider />
         <Layout>
-          <Header collapsed={this.state.siderCollapsed} onMenuControl={this.handleMenuControl} />
+          <Header />
           <Content>页面内容</Content>
           <Footer />
         </Layout>
