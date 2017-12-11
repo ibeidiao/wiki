@@ -48,7 +48,7 @@ class SiderWrap extends Component {
             <span>
               项目列表
             </span>
-            <Link to="/projects" href="/projects" />
+            <Link to="/main/projects" href="/main/projects" />
           </Menu.Item>
           <Menu.Item key="4" style={{ padding: '0 24px' }}>
             <Icon type="team" />

@@ -31,14 +31,20 @@ class App extends Component {
     };
   }
 
+  handleMenuControl = () => {
+    this.setState({
+      siderCollapsed: !this.state.siderCollapsed,
+    });
+  }
+
   render() {
     return (
       <Layout>
         <Sider collapsed={this.state.siderCollapsed} />
         <Layout>
-          <Header />
+          <Header collapsed={this.state.siderCollapsed} onMenuControl={this.handleMenuControl} />
           <Content>
-            <Route path="/projects" component={Projects} />
+            <Route path={`${this.props.match.url}/projects`} component={Projects} />
           </Content>
           <Footer />
         </Layout>

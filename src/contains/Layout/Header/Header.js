@@ -8,17 +8,11 @@ import './header.less';
 const { Header } = Layout;
 
 class HeaderWrap extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      a: true,
-    };
-  }
-
   handleMenuCilck = () => {
-    console.log(111);
-    this.state.a = !this.state.a;
+    // this.setState({
+    //   a: !this.state.a,
+    // });
+    this.props.onMenuControl();
   }
 
   render() {
@@ -36,12 +30,12 @@ class HeaderWrap extends Component {
         </Menu.Item>
       </Menu>
     );
-    const iconType = this.state.a ? 'menu-unfold' : 'menu-fold';
+    const iconType = this.props.collapsed ? 'menu-unfold' : 'menu-fold';
 
     return (
       <Header className="header">
         <div className="action">
-          <Icon onClick={this.handleMenuCilck} type={iconType} style={{ fontSize: '24px', verticalAlign: 'middle' }} />
+          <Icon onClick={this.handleMenuCilck} type={iconType} style={{ fontSize: '24px', verticalAlign: 'middle', lineHeight: '64px' }} />
         </div>
         <div className="right">
           <DropdownAvatar menu={menu} placement="bottomRight" className="action" size="small" icon="user" username="User" />
