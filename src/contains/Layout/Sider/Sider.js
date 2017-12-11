@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
@@ -63,4 +64,10 @@ class SiderWrap extends Component {
   }
 }
 
-export default SiderWrap;
+const mapStateToProps = (state) => {
+  return {
+    collapsed: state.app.collapsed,
+  };
+};
+
+export default connect(mapStateToProps)(SiderWrap);

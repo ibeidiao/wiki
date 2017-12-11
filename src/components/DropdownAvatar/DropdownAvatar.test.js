@@ -4,7 +4,6 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 
 import { Menu } from 'antd';
 
-
 import DropdownAvatar from './DropdownAvatar';
 
 it('DropdownAvatar Component', () => {

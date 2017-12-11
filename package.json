@@ -35,7 +35,12 @@
     "react": "^16.2.0",
     "react-dev-utils": "^4.2.1",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
@@ -50,7 +55,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "precommit": "npm run lint",
     "prepush": "npm run lint",
-    "lint": "./node_modules/eslint/bin/eslint.js src/**/*.js src/**/*.jsx src/*.js src/*.jsx"
+    "lint": "eslint src/**/*.js src/**/*.jsx src/*.js src/*.jsx"
   },
   "jest": {
     "collectCoverageFrom": [
