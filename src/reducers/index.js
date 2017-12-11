@@ -1,7 +1,13 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux'; // 将routerReducer一起合并管理
 
-import appReducer from './app';
+import app from './app';
+import department from './department';
+import user from './user';
 
 export default combineReducers({
-  appReducer,
+  app,
+  department,
+  user,
+  routing: routerReducer
 });

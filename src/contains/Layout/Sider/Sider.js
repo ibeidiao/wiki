@@ -66,7 +66,7 @@ class SiderWrap extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    collapsed: state.appReducer.collapsed,
+    collapsed: state.app.collapsed,
   };
 };
 

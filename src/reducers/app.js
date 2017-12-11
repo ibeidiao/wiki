@@ -1,4 +1,4 @@
-const CONTROL_SIDER_COLLAPSED = 'CONTROL_SIDER_COLLAPSED';
+import { CONTROL_SIDER_COLLAPSED } from '../constants'; // 引入action类型常量名
 
 const defaultState = {
   collapsed: true,
@@ -11,8 +11,4 @@ export default (state = defaultState, action) => {
     default:
       return state;
   }
-};
-
-export const controlSiderCollapsed = (collapsed) => {
-  return { type: CONTROL_SIDER_COLLAPSED, collapsed };
 };

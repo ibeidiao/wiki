@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout, Menu, Icon } from 'antd';
 
-import { controlSiderCollapsed } from '../../../reducers/app';
+import { controlSiderCollapsed } from '../../../actions/app';
 
 import DropdownAvatar from '../../../components/DropdownAvatar/DropdownAvatar';
 
@@ -43,7 +43,7 @@ class HeaderWrap extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    collapsed: state.appReducer.collapsed,
+    collapsed: state.app.collapsed,
   };
 };
 
