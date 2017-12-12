@@ -9,8 +9,6 @@ const loggerMiddleware = createLogger();
 const middleware = [thunk, loggerMiddleware];
 
 // 利用compose增强store，这个 store 与 applyMiddleware一起使用
-const finalCreateStore = compose(
-  applyMiddleware(...middleware)
-)(createStore);
+const finalCreateStore = compose(applyMiddleware(...middleware))(createStore);
 
 export default finalCreateStore;

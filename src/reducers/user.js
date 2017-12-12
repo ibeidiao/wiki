@@ -2,7 +2,7 @@ import { ADDLOGINCOUNT } from '../constants'; // 引入action类型常量名
 
 // 初始化state数据
 const initialState = {
-  loginCount: 0
+  loginCount: 0,
 };
 
 // 通过dispatch action进入
@@ -15,4 +15,4 @@ export default function user(state = initialState, action) {
     default:
       return state;
   }
-};
+}

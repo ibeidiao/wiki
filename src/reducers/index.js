@@ -9,5 +9,5 @@ export default combineReducers({
   app,
   department,
   user,
-  routing: routerReducer
+  routing: routerReducer,
 });
