@@ -43,7 +43,9 @@
     "no-extra-semi": [0],
     "no-shadow": [0],
     "object-curly-newline": [0],
-    "jsx-a11y/anchor-is-valid": [0]
+    "jsx-a11y/anchor-is-valid": [0],
+    "no-throw-literal": [1],
+    "object-shorthand": [1]
   },
   "parserOptions": {
     "ecmaFeatures": {

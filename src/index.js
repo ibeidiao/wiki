@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 import App from './pages/App/App';
 import Login from './pages/Login/Login';
+import PrivateRoute from './contains/PrivateRoute/PrivateRoute';
 
 import finalCreateStore from './store/configureStore';
 import reducer from './reducers/index';
@@ -42,7 +43,7 @@ ReactDOM.render(
             />
           )}
         />
-        <Route path="/main" component={App} />
+        <PrivateRoute path="/main" component={App} />
         <Route path="/login" component={Login} />
       </div>
     </Router>
