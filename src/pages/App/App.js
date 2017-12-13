@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Layout } from 'antd';
-import { Link } from 'react-router-dom';
 
 import MyLayout from '../../contains/Layout/Layout';
-
-import { INCREASE, DECREASE, GETSUCCESS, REFRESHDATA } from '../../constants';
-import { fetchPostsIfNeeded } from '../../actions/department';
-import { addLoginCount } from '../../actions/user';
 
 import './app.less';
 
@@ -21,47 +16,27 @@ const {
   Sider,
 } = MyLayout;
 
-const Projects = () => (
-  <div>
-    This is Project.
-  </div>
-);
-
 class App extends Component {
   render() {
-    const { departmentList, userLoginCount, addLoginCount, fetchPostsIfNeeded } = this.props;
-    console.log('uuuuuu');
-    console.log(departmentList);
-    console.log(userLoginCount);
     return (
-      <Layout>
-        <Sider />
+      <Router>
         <Layout>
-          <Header />
-          <Content>
-            <ul>
-              <li><Link to="/protected">非公开页面</Link></li>
-            </ul>
-            <button type="button" onClick={() => fetchPostsIfNeeded()}>加载数据</button>
-            <button type="button" onClick={() => addLoginCount(3)}>增加登录次数</button>
-            <p style={{ textAlign: 'center' }}>{ departmentList.length }</p>
-            <p style={{ textAlign: 'center' }}>登录次数：{ userLoginCount }</p>
-          </Content>
-          <Footer />
+          <Sider />
+          <Layout>
+            <Header />
+            <Content>
+              <div>
+                <Route path="/members" render={() => <div> this is a member </div>} />
+                <Route path="/projects" render={() => <div> this is a project </div>} />
+                <Route exact path="/" render={() => <Redirect to="/members"><div> this is a member </div></Redirect>} />
+              </div>
+            </Content>
+            <Footer />
+          </Layout>
         </Layout>
-      </Layout>
+      </Router>
     );
   }
 }
 
-const getList = (state) => {
-  return {
-    departmentList: state.department.lists,
-    userLoginCount: state.user.loginCount
-  };
-};
-
-export default connect(
-  getList,
-  { fetchPostsIfNeeded, addLoginCount }
-)(App);
+export default App;
