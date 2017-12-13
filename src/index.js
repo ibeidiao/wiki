@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import App from './pages/App/App';
 import Login from './pages/Login/Login';
-import PrivateRoute from './contains/PrivateRoute/PrivateRoute';
 
 import finalCreateStore from './store/configureStore';
 import reducer from './reducers/index';
@@ -21,18 +20,9 @@ ReactDOM.render(
     <Router>
       <div>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <Redirect to={{
-                pathname: '/main',
-              }}
-              />
-            )}
-          />
-          <PrivateRoute path="/main" component={App} />
+          <Route exact path="/" component={App} />
           <Route path="/login" component={Login} />
+          <Route component={App} />
         </Switch>
       </div>
     </Router>

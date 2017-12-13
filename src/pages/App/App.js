@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import MyLayout from '../../contains/Layout/Layout';
+import Breadcrumb from '../../contains/Breadcrumb/Breadcrumb';
+
+import Member from '../Member/Member';
 
 import './app.less';
 
@@ -25,10 +28,13 @@ class App extends Component {
           <Layout>
             <Header />
             <Content>
-              <div>
-                <Route path="/members" render={() => <div> this is a member </div>} />
-                <Route path="/projects" render={() => <div> this is a project </div>} />
-                <Route exact path="/" render={() => <Redirect to="/members"><div> this is a member </div></Redirect>} />
+              <div className="content-header"><Breadcrumb /></div>
+              <div className="content-body">
+                <Switch>
+                  <Route path="/members" component={Member} />
+                  <Route path="/projects" render={() => <div> this is a project </div>} />
+                  <Route exact path="/" render={() => <Redirect to="/members" />} />
+                </Switch>
               </div>
             </Content>
             <Footer />

@@ -31,7 +31,7 @@ class SiderWrap extends Component {
         width="240"
         style={{
           overflow: 'auto',
-          height: '100vh',
+          minHeight: '100vh',
         }}
         className="sider"
       >
