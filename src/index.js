@@ -10,7 +10,7 @@ import finalCreateStore from './store/configureStore';
 import reducer from './reducers/index';
 import registerServiceWorker from './registerServiceWorker';
 
-import './index.css';
+import './index.less';
 
 // 给增强后的store传入reducer
 const store = finalCreateStore(reducer);

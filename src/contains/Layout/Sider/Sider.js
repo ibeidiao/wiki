@@ -56,7 +56,7 @@ class SiderWrap extends Component {
             <span>
               用户管理
             </span>
-            <Link to="/members" href="/members" />
+            <Link to="/users" href="/users" />
           </Menu.Item>
         </Menu>
       </Sider>

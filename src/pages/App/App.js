@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import MyLayout from '../../contains/Layout/Layout';
 import Breadcrumb from '../../contains/Breadcrumb/Breadcrumb';
 
-import Member from '../Member/Member';
+import User from '../User/User';
 
 import './app.less';
 
@@ -31,9 +31,9 @@ class App extends Component {
               <div className="content-header"><Breadcrumb /></div>
               <div className="content-body">
                 <Switch>
-                  <Route path="/members" component={Member} />
-                  <Route path="/projects" render={() => <div> this is a project </div>} />
-                  <Route exact path="/" render={() => <Redirect to="/members" />} />
+                  <Route exact path="/users" component={User} />
+                  <Route exact path="/projects" render={() => <div> this is a project </div>} />
+                  <Route exact path="/" render={() => <Redirect to={{ pathname: '/users' }} />} />
                 </Switch>
               </div>
             </Content>
