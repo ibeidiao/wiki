@@ -7,3 +7,7 @@ export const REFRESHDATA = 'REFRESHDATA';
 export const ADDLOGINCOUNT = 'ADDLOGINCOUNT';
 
 export const CONTROL_SIDER_COLLAPSED = 'CONTROL_SIDER_COLLAPSED';
+
+// api 前后缀。
+export const API_PREFIX = 'http://localhost:3000/api';
+export const API_SUFFIX = '';

@@ -12,7 +12,7 @@ class UserTableHeader extends Component {
     };
   }
 
-  onCancel = () => {
+  handleCancel = () => {
     this.setState({ showAddUserForm: false });
   }
 
@@ -25,7 +25,9 @@ class UserTableHeader extends Component {
     const button = <Button onClick={this.handleAddClick} type="dashed"><Icon style={{ marginRight: '10px' }} type="plus" />添加用户</Button>;
     return (
       <div style={{ textAlign: 'right' }}>
-        { showAddUserForm ? <AddUserForm onCancel={this.onCancel} /> : button }
+        { showAddUserForm ? (
+          <AddUserForm onAddUser={this.props.onReloadTable} onCancel={this.handleCancel} />
+        ) : button }
       </div>
     );
   }
