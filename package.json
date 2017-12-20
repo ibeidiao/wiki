@@ -24,6 +24,7 @@
     "fs-extra": "3.0.1",
     "history": "^4.7.2",
     "html-webpack-plugin": "2.29.0",
+    "isomorphic-fetch": "^2.2.1",
     "jest": "20.0.4",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
@@ -56,7 +57,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "precommit": "npm run lint",
     "prepush": "npm run lint",
-    "lint": "eslint src/**/*.js src/**/*.jsx src/*.js src/*.jsx"
+    "lint": "eslint src/**/*.js src/**/*.jsx src/*.js src/*.jsx",
+    "fix-lint": "eslint src/**/*.js src/**/*.jsx src/*.js src/*.jsx --fix"
   },
   "jest": {
     "collectCoverageFrom": [
