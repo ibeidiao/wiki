@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM, { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -15,6 +15,12 @@ import './index.less';
 // 给增强后的store传入reducer
 const store = finalCreateStore(reducer);
 
+const Error = () => {
+  return (
+    <div>404</div>
+  );
+};
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
@@ -22,7 +28,12 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/login" component={Login} />
-          <Route component={App} />
+
+          <App>
+            <Route />
+          </App>
+
+          <Route component={Error} />
         </Switch>
       </div>
     </Router>

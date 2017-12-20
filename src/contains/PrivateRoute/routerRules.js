@@ -9,7 +9,7 @@ const routeRules = {
         '/main',
       ],
       redirectPath: '/',
-    }
+    },
   },
   check(type, path) {
     const that = this;
