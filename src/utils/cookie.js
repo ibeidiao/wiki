@@ -58,7 +58,7 @@ const cookieUtils = {
     const pairs = str.split(/ *; */);
     let pair = [];
     if (pairs[0] === '') return obj;
-    for (let i = 0; i < pairs.length; ++i) {
+    for (let i = 0; i < pairs.length; i += 1) {
       pair = pairs[i].split('=');
       obj[that.decode(pair[0])] = that.decode(pair[1]);
     }

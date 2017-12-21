@@ -3,39 +3,98 @@ import { Link } from 'react-router-dom';
 
 import { Card, Table, Button, Icon, Input, Checkbox } from 'antd';
 
+import ProjectService from '../../services/project.service';
+
 import './project.less';
 
 const { Search } = Input;
-
-const data = [];
-
-for (let i = 0; i < 46; i += 1) {
-  data.push({
-    id: i,
-    name: `项目名称${i}`,
-    description: `这是一个比较和谐的项目描述${i}`,
-    ownerName: `拥有者${i}`,
-    updaterName: `更新者${i}`,
-    createTime: '2017/02/17',
-    modifyTime: '2017-8-12 12:20:19',
-  });
-}
 
 class Project extends Component {
   constructor() {
     super();
 
     this.state = {
+      isOwned: false,
       filter: '',
+      projectList: [],
+      loading: false,
+      pagination: {},
     };
+  }
+
+  componentWillMount() {
+    this._getProjectList();
+  }
+
+  _getProjectList(params = {}) {
+    this.setState({ loading: true });
+    ProjectService.getProjectList(params).then(({ meta, data }) => {
+      if (meta.errorNo === 0) {
+        const pagination = { ...this.state.pagination };
+
+        pagination.total = data.count;
+        this.setState({
+          projectList: data.list,
+          loading: false,
+          pagination,
+        });
+      }
+    });
+  }
+
+  handleTableChange = (pagination) => {
+    const { isOwned, filter, pagination: pager } = { ...this.state };
+    pager.current = pagination.current;
+    const ownerId = isOwned ? 10038 : '';
+    this.setState({
+      pagination: pager,
+    });
+    this._getProjectList({
+      pageNum: pagination.current,
+      filter,
+      ownerId,
+    });
   }
 
   handleFilterChange = (e) => {
     this.setState({ filter: e.target.value });
   }
 
+  handleSearch = () => {
+    const pager = { ...this.state.pagination };
+    pager.current = 1;
+    const { isOwned, filter } = this.state;
+    const ownerId = isOwned ? 10038 : '';
+    this.setState({
+      pagination: pager,
+    });
+    const params = { pageNum: 1, ownerId, filter };
+    this._getProjectList(params);
+  }
+
   handleInputClear = () => {
-    this.setState({ filter: '' });
+    const pager = { ...this.state.pagination };
+    pager.current = 1;
+    const { isOwned } = this.state;
+    const ownerId = isOwned ? 10038 : '';
+    this.setState({
+      pagination: pager,
+      filter: '',
+    });
+    const params = { pageNum: 1, ownerId };
+    this._getProjectList(params);
+  }
+
+  handleOwnCheckBoxChange = (e) => {
+    const pager = { ...this.state.pagination };
+    pager.current = 1;
+    this.setState({
+      pagination: pager,
+      isOwned: e.target.checked,
+    });
+    const ownerId = e.target.checked ? 10038 : '';
+    const params = { pageNum: 1, ownerId };
+    this._getProjectList(params);
   }
 
   render() {
@@ -65,7 +124,7 @@ class Project extends Component {
         key: 'lastUpdate',
         render({ updaterName, modifyTime }) {
           return <div>{`${updaterName}，${modifyTime}`}</div>;
-        }
+        },
       },
       {
         title: '操作',
@@ -78,11 +137,17 @@ class Project extends Component {
               <button className="table-action-btn">更多操作</button>
             </span>
           );
-        }
+        },
       },
     ];
 
-    const { filter } = this.state;
+    const {
+      filter,
+      projectList,
+      loading,
+      pagination,
+      isOwned,
+    } = this.state;
     const searchSuffix = filter ? <Icon className="search-input-clear" key="clear" type="close-circle" onClick={this.handleInputClear} /> : null;
 
     return (
@@ -96,18 +161,21 @@ class Project extends Component {
         <div className="card-body-warpper">
           <Table
             rowKey="id"
-            dataSource={data}
+            dataSource={projectList}
             columns={columns}
+            loading={loading}
+            pagination={pagination}
+            onChange={this.handleTableChange}
             title={() => (
               <div>
-                <Checkbox style={{ userSelect: 'none' }}>拥有的</Checkbox>
+                <Checkbox checked={isOwned} onChange={this.handleOwnCheckBoxChange} style={{ userSelect: 'none' }}>拥有的</Checkbox>
                 <Search
                   value={filter}
                   placeholder="请输入项目名称／拥有者"
                   suffix={searchSuffix}
                   style={{ width: '300px', paddingRight: 0, paddingLeft: 0 }}
                   onChange={this.handleFilterChange}
-                  // onSearch={this.handleSearch}
+                  onSearch={this.handleSearch}
                 />
               </div>
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Form, Input, Button, Icon, message } from 'antd';
 
 import ProjectService from '../../services/project.service';
@@ -21,10 +21,7 @@ class AddProjectForm extends Component {
     ProjectService.createProject(project).then(({ meta }) => {
       if (meta.errorNo === 0) {
         message.success(meta.errorInfo);
-        setTimeout(() => {
-          console.log(history);
-          history.push('/projects');
-        }, 500);
+        history.push('/projects');
       }
     });
   }
@@ -104,4 +101,10 @@ class AddProjectForm extends Component {
 
 const WrappedAddProjectForm = Form.create()(AddProjectForm);
 
-export default withRouter(WrappedAddProjectForm);
+const mapStateToProps = (state) => {
+  return {
+    history: state.root.history,
+  };
+};
+
+export default connect(mapStateToProps)(WrappedAddProjectForm);
