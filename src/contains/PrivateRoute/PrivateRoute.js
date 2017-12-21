@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import routerRules from './routerRules';
-import cookieUtils from '../../components/Cookie/utils';
+import cookieUtils from '../../utils/cookie';
 
 class PrivateRoute extends Component {
   state = {
