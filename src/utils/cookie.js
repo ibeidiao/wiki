@@ -77,7 +77,7 @@ const cookieUtils = {
     } catch (e) {
       throw ('error `decode(%o)` - %o', value, e);
     }
-  }
+  },
 };
 
 export default cookieUtils;

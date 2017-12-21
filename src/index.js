@@ -33,6 +33,12 @@ ReactDOM.render(
             <Route />
           </App>
 
+          {/* <App>
+            <Route exact path="/users" component={User} />
+            <Route exact path="/projects" render={() => <div> this is a project </div>} />
+            <Route exact path="/" render={() => <Redirect to={{ pathname: '/users' }} />} />
+          </App> */}
+
           <Route component={Error} />
         </Switch>
       </div>

@@ -6,33 +6,72 @@ import cookieUtils from '../../utils/cookie';
 
 class PrivateRoute extends Component {
   state = {
-    type: -1,
+    isLogin: 0,
+    auth: 0,
   }
 
   componentWillMount() {
-    const type = cookieUtils.get('login') ? 0 : -1;
-    this.setState({ type });
+    const isLogin = this.isLogin();
+    let auth = 0;
+
+    if (isLogin) {
+      auth = this.getAuth();
+    }
+
+    this.setState({ isLogin, auth });
+  }
+
+  // 获取用户权限
+  getAuth() {
+    const auth = 1;
+    return auth;
+  }
+
+  // 判断是否已登录
+  isLogin() {
+    const isLogin = cookieUtils.get('login') ? 1 : 0;
+    return isLogin;
   }
 
   render() {
-    const { component, ...rest } = this.props;
-    const RouteComponent = component;
+    const { component, render, ...rest } = this.props;
+    const RouteComponent = component !== undefined ? component : render;
     const { path } = { ...rest };
-    const { isAuth, redirectPath } = routerRules.check(this.state.type, path);
+
+    // if () {
+    // }
+    const redirectPath = routerRules.check(path, this.state.isLogin, this.state.auth);
+
+    // const RedirectComponent = (_props) => {
+    //   let Temp;
+    //   switch (redirectPath) {
+    //     case '':
+    //       Temp = <RouteComponent {..._props} />;
+    //       break;
+    //     case null:
+    //       Temp = null;
+    //       break;
+    //     default:
+    //       Temp = <Redirect to={{ pathname: redirectPath, state: { from: _props.location } }} />;
+    //       break;
+    //   }
+
+    //   return (Temp);
+    // };
+
     return (
       <Route
         {...rest}
         render={_props => (
-          isAuth ? (
+          redirectPath === '' ? (
             <RouteComponent {..._props} />
-        ) : (
-          <Redirect to={{
-            pathname: redirectPath,
-            state: { from: _props.location },
-          }}
-          />
-        )
-      )}
+          ) : (
+          redirectPath === null ? (
+            null
+          ) : (
+            <Redirect to={{ pathname: redirectPath, state: { from: _props.location } }} />
+          ))
+        )}
       />
     );
   }

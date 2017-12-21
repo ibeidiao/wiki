@@ -1,29 +1,55 @@
 const routeRules = {
-  rules: {
-    '-1': {
-      paths: [],
-      redirectPath: '/login',
+  routers: [
+    {
+      path: '/login',
+      unLogin: 1,
     },
-    '0': {
-      paths: [
-        '/main',
-      ],
-      redirectPath: '/',
+    {
+      path: '/',
+      unLogin: 1,
     },
-  },
-  check(type, path) {
-    const that = this;
-    let isAuth = false;
+    {
+      path: '/users',
+      auth: 2,
+    },
+    {
+      path: '/users',
+      auth: 2,
+    },
+    {
+      path: '/projects',
+      auth: 1, // auth：1为管理员权限
+    },
+  ],
+  check(path, isLogin, auth) {
+    if (path === undefined || isLogin === undefined) {
+      throw ('参数不完整');
+    }
 
-    const { paths, redirectPath } = that.rules[type];
-    for (let i = 0; i < paths.length; i++) {
-      if (path === paths[i]) { // todo 考虑用正则匹配
-        isAuth = true;
+    const that = this;
+    const { routers } = that;
+
+    let router = '';
+    let redirectPath = '';
+
+    for (let i = 0; i < routers.length; i++) {
+      if (path === routers[i].path) { // todo 考虑用正则匹配
+        router = routers[i];
         break;
       }
     }
 
-    return { isAuth, redirectPath };
+    if (router) {
+      if (!router.unLogin && !isLogin) { // 未登录
+        redirectPath = '/login';
+      } else if (!router.unLogin && !(router.auth === auth)) { // 已登录但没有权限访问的路由
+        redirectPath = null;
+      }
+    } else { // 匹配不到路由返回404页面
+      redirectPath = '/error';
+    }
+
+    return redirectPath;
   },
 };
 
