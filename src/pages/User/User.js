@@ -165,7 +165,9 @@ class User extends Component {
         );
       },
     }];
-    const { filter } = this.state;
+    const {
+      filter, userList, loading, pagination,
+    } = this.state;
     const searchSuffix = filter ? <Icon className="search-input-clear" key="clear" type="close-circle" onClick={this.handleInputClear} /> : null;
     return (
       <Card style={{ width: '100%' }}>
@@ -178,10 +180,10 @@ class User extends Component {
         <div className="card-body-warpper">
           <Table
             rowKey="id"
-            dataSource={this.state.userList}
+            dataSource={userList}
             columns={columns}
-            loading={this.state.loading}
-            pagination={this.state.pagination}
+            loading={loading}
+            pagination={pagination}
             onChange={this.handleTableChange}
             title={() => (
               <Search

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 
 import Logo from '../../../components/Logo/Logo';
@@ -72,10 +72,10 @@ class SiderWrap extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     collapsed: state.app.collapsed,
+    location: state.routing.location,
   };
 };
 
-export default withRouter(connect(mapStateToProps)(SiderWrap));
+export default connect(mapStateToProps)(SiderWrap);

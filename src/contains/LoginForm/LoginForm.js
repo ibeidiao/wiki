@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
@@ -8,13 +8,9 @@ import './login-form.less';
 const FormItem = Form.Item;
 
 class LoginForm extends Component {
-  static contextTypes = {
-    router: PropTypes.object.isRequired,
-  };
-
   handleSubmit = (e) => {
     e.preventDefault();
-    const { history } = this.context.router;
+    const { history } = this.props;
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
@@ -51,4 +47,10 @@ class LoginForm extends Component {
 
 const WrappedLoginForm = Form.create()(LoginForm);
 
-export default WrappedLoginForm;
+const mapStateToProps = (state) => {
+  return {
+    history: state.root.history,
+  };
+};
+
+export default connect(mapStateToProps)(WrappedLoginForm);
