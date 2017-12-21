@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './breadcrumb.less';
 
@@ -41,4 +42,10 @@ class BreadcrumbWrap extends Component {
   }
 }
 
-export default withRouter(BreadcrumbWrap);
+const mapStateToProps = (state) => {
+  return {
+    location: state.routing.location,
+  };
+};
+
+export default connect(mapStateToProps)(BreadcrumbWrap);
