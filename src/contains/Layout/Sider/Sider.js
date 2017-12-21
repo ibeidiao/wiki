@@ -51,6 +51,13 @@ class SiderWrap extends Component {
             height: 'calc(100% - 96px)',
           }}
         >
+          <Menu.Item key="department" style={{ padding: '0 24px' }}>
+            <Icon type="team" />
+            <span>
+              部门管理
+            </span>
+            <Link to="/departments" href="/departments" />
+          </Menu.Item>
           <Menu.Item key="project" style={{ padding: '0 24px' }}>
             <Icon type="database" />
             <span>
@@ -59,7 +66,7 @@ class SiderWrap extends Component {
             <Link to="/projects" href="/projects" />
           </Menu.Item>
           <Menu.Item key="user" style={{ padding: '0 24px' }}>
-            <Icon type="team" />
+            <Icon type="user" />
             <span>
               用户管理
             </span>
