@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Card, Table, Input, Button, Popconfirm, message, Icon } from 'antd';
+import { Card, Table, Input, Popconfirm, message, Icon } from 'antd';
 
 import UserTableHeader from '../../contains/UserTableHeader/UserTableHeader';
 
@@ -61,11 +60,11 @@ class User extends Component {
     UserService.setStatus(params).then(({ meta }) => {
       if (meta.errorNo === 0) {
         message.success(meta.errorInfo);
-        const params = {
+        const p = {
           pageNum: this.state.pagination.current,
-          filter: this.state.filter
+          filter: this.state.filter,
         };
-        this._getUserList(params);
+        this._getUserList(p);
       }
     });
   }
