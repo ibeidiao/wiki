@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM, { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+
+import { ConnectedRouter } from 'react-router-redux';
 
 import App from './pages/App/App';
 import Login from './pages/Login/Login';
@@ -9,6 +11,8 @@ import Login from './pages/Login/Login';
 import finalCreateStore from './store/configureStore';
 import reducer from './reducers/index';
 import registerServiceWorker from './registerServiceWorker';
+
+import history from './history';
 
 import './index.less';
 
@@ -23,7 +27,7 @@ const Error = () => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <div>
         <Switch>
           <Route exact path="/" component={App} />
@@ -42,7 +46,7 @@ ReactDOM.render(
           <Route component={Error} />
         </Switch>
       </div>
-    </Router>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
 );

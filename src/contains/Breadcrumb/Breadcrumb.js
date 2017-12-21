@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './breadcrumb.less';
 
@@ -8,6 +9,7 @@ const breadcrumbNameMap = {
   '': '首页',
   '/users': '用户管理',
   '/projects': '项目列表',
+  '/createProject': '创建项目',
 };
 
 class BreadcrumbWrap extends Component {
@@ -40,4 +42,10 @@ class BreadcrumbWrap extends Component {
   }
 }
 
-export default withRouter(BreadcrumbWrap);
+const mapStateToProps = (state) => {
+  return {
+    location: state.routing.location,
+  };
+};
+
+export default connect(mapStateToProps)(BreadcrumbWrap);

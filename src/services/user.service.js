@@ -18,7 +18,7 @@ const UserService = {
   },
   checkLoginNameUnique(params) {
     return fetch.post('/user/checkLoginNameUnique', params);
-  }
+  },
 };
 
 export default UserService;

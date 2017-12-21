@@ -30,15 +30,15 @@ class AddUserForm extends Component {
     UserService.checkLoginNameUnique({ loginName: value })
       .then(({ meta }) => {
         if (meta.errorNo === 0) {
-          callback();
+          return callback();
         } else {
-          callback(meta.errorInfo);
+          return callback(meta.errorInfo);
         }
       });
   }
 
   handleSubmit = (e) => {
-    e.preventDefault(); // TODO: 添加用户，登录名唯一验证
+    e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this._addUser(values);
@@ -51,7 +51,12 @@ class AddUserForm extends Component {
   }
 
   render() {
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    const {
+      getFieldDecorator,
+      getFieldsError,
+      getFieldError,
+      isFieldTouched,
+    } = this.props.form;
 
     const loginNameError = isFieldTouched('loginName') && getFieldError('loginName');
     const passwordError = isFieldTouched('password') && getFieldError('password');
