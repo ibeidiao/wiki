@@ -5,8 +5,12 @@ import { Route, Switch } from 'react-router-dom';
 
 import { ConnectedRouter } from 'react-router-redux';
 
+import Routers from './Routers';
+
 import App from './pages/App/App';
 import Login from './pages/Login/Login';
+import Users from './pages/User/User';
+import PrivateRoute from './contains/PrivateRoute/PrivateRoute';
 
 import finalCreateStore from './store/configureStore';
 import reducer from './reducers/index';
@@ -30,19 +34,10 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <div>
         <Switch>
-          <Route exact path="/" component={App} />
-          <Route path="/login" component={Login} />
-
-          <App>
-            <Route />
-          </App>
-
-          {/* <App>
-            <Route exact path="/users" component={User} />
-            <Route exact path="/projects" render={() => <div> this is a project </div>} />
-            <Route exact path="/" render={() => <Redirect to={{ pathname: '/users' }} />} />
-          </App> */}
-
+          <Route exact path="/login" component={Login} />
+          <PrivateRoute path="/" component={App}>
+            <Route path="/users" component={Users} />
+          </PrivateRoute>
           <Route component={Error} />
         </Switch>
       </div>
