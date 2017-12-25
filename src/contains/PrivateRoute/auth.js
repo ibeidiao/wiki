@@ -9,6 +9,10 @@ const routeRules = {
       auth: [],
     },
     {
+      path: '/departments',
+      auth: [],
+    },
+    {
       path: '/users',
       auth: [],
     },

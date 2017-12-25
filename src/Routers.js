@@ -5,6 +5,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import App from './pages/App/App';
 import User from './pages/User/User';
+import Department from './pages/Department/Department';
 import PrivateRoute from './contains/PrivateRoute/PrivateRoute';
 
 const Project = () => (
@@ -12,6 +13,11 @@ const Project = () => (
 );
 
 const appChildren = [
+  {
+    path: '/departments',
+    component: Department,
+    auth: true,
+  },
   {
     path: '/users',
     component: User,
