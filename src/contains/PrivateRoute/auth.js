@@ -14,7 +14,7 @@ const routeRules = {
     },
     {
       path: '/projects',
-      auth: [10], // auth：1为管理员权限
+      auth: [], // auth：1为管理员权限
     },
   ],
   check(path, isLogin, auth) {
