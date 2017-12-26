@@ -1,15 +1,38 @@
 import React, { Component } from 'react';
 import { ConnectedRouter } from 'react-router-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Login from './pages/Login/Login';
 import App from './pages/App/App';
 import User from './pages/User/User';
+import Department from './pages/Department/Department';
 import PrivateRoute from './contains/PrivateRoute/PrivateRoute';
 
 const Project = () => (
   <div>this is project</div>
 );
+
+const appChildren = [
+  {
+    path: '/departments',
+    component: Department,
+    auth: true,
+  },
+  {
+    path: '/users',
+    component: User,
+    auth: true,
+  },
+  {
+    path: '/projects',
+    component: Project,
+    auth: true,
+  },
+  {
+    path: '/',
+    redirectTo: '/users',
+  },
+];
 
 const routers = [
   {
@@ -25,38 +48,31 @@ const routers = [
   },
 ];
 
-const appChildren = [
-  {
-    path: '/users',
-    component: User,
-    auth: true,
-  },
-  {
-    path: '/project',
-    component: Project,
-    auth: true,
-  },
-];
-
 class Routers extends Component {
-  makeRoute(Parent, children) {
-    if (children && children.length) {
+  createRoute(Parent, _children, props) {
+    const { redirectTo, ...rest } = props;
+
+    if (redirectTo) {
+      return (<Parent {...rest} exact render={() => <Redirect to={{ pathname: redirectTo }} />} />);
+    }
+
+    if (_children && _children.length) {
       return (
-        <Parent>
-          {children.map(({
-              path, component, auth, _children,
-            }) => {
-              const _props = { path, component };
+        <Parent {...props} >
+          {_children.map(({
+              auth, children, ..._rest
+            }, key) => {
+              const _props = { key, ..._rest };
               if (auth) {
-                return (this.makeRoute(<PrivateRoute {..._props} />), _children);
+                return (this.createRoute(PrivateRoute, children, _props));
               } else {
-                return (this.makeRoute(<Route {..._props} />), _children);
+                return (this.createRoute(Route, children, _props));
               }
             })}
         </Parent>
       );
     } else {
-      return (<Parent />);
+      return (<Parent {...props} exact />);
     }
   }
 
@@ -64,7 +80,8 @@ class Routers extends Component {
     return (
       <ConnectedRouter history={this.props.history}>
         <div>
-          {this.makeRoute(<Switch />, routers)}
+          {this.createRoute(Switch, routers, {})}
+          {/** todo 不传Switch */}
           {/* <Switch>
             {routers.map(({
               path, component, exact, auth,

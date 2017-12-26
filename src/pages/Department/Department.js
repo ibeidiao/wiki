@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Table, Input, Button, Popconfirm, message, Icon } from 'antd';
+import UserTableHeader from '../../contains/UserTableHeader/UserTableHeader';
 
 import UserService from '../../services/user.service';
 
@@ -63,6 +64,9 @@ class Department extends Component {
       <Card style={{ width: '100%' }}>
         <div className="card-head-warpper">
           <div className="card-head-title">部门列表</div>
+          <div className="card-head-extra">
+            <UserTableHeader />
+          </div>
         </div>
         <div className="card-body-warpper">
           <Table

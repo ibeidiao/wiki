@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import { ConnectedRouter } from 'react-router-redux';
 
@@ -26,15 +26,12 @@ const store = finalCreateStore(reducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    {/* <ConnectedRouter history={history}>
       <div>
-        {/* <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route path="/" component={App} />
-        </Switch> */}
         {router}
       </div>
-    </ConnectedRouter>
+    </ConnectedRouter> */}
+    <Routers history={history} />
   </Provider>,
   document.getElementById('root'),
 );

@@ -32,14 +32,8 @@ class App extends Component {
           <Content>
             <div className="content-header"><Breadcrumb /></div>
             <div className="content-body">
-              {/* <Switch>
-                <Route exact path="/departments" component={Department} />
-                <Route exact path="/users" component={User} />
-                <Route exact path="/projects" component={Project} />
-                <Route exact path="/createProject" component={CreateProject} />
-                <Route exact path="/" render={() => <Redirect to={{ pathname: '/users' }} />} />
-              </Switch> */}
-              {this.props.routes}
+              {/* {this.props.routes} */}
+              {this.props.children}
             </div>
           </Content>
         </Layout>
