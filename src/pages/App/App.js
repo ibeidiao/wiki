@@ -32,13 +32,14 @@ class App extends Component {
           <Content>
             <div className="content-header"><Breadcrumb /></div>
             <div className="content-body">
-              <Switch>
+              {/* <Switch>
                 <Route exact path="/departments" component={Department} />
                 <Route exact path="/users" component={User} />
                 <Route exact path="/projects" component={Project} />
                 <Route exact path="/createProject" component={CreateProject} />
                 <Route exact path="/" render={() => <Redirect to={{ pathname: '/users' }} />} />
-              </Switch>
+              </Switch> */}
+              {this.props.routes}
             </div>
           </Content>
         </Layout>

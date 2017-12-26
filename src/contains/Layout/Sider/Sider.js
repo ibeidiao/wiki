@@ -12,6 +12,7 @@ const {
 const selectedKeysMap = {
   '/users': ['user'],
   '/projects': ['project'],
+  '/departments': ['department'],
 };
 
 class SiderWrap extends Component {

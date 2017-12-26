@@ -170,7 +170,7 @@ class User extends Component {
     } = this.state;
     const searchSuffix = filter ? <Icon className="search-input-clear" key="clear" type="close-circle" onClick={this.handleInputClear} /> : null;
     return (
-      <Card style={{ width: '100%' }}>
+      <Card style={{ width: '100%', marginBottom: '20px' }}>
         <div className="card-head-warpper">
           <div className="card-head-title">用户列表</div>
           <div className="card-head-extra">

@@ -20,26 +20,19 @@ import history from './history';
 
 import './index.less';
 
+import router from './route/router';
 // 给增强后的store传入reducer
 const store = finalCreateStore(reducer);
-
-const Error = () => {
-  return (
-    <div>404</div>
-  );
-};
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <Switch>
+        {/* <Switch>
           <Route exact path="/login" component={Login} />
-          <PrivateRoute path="/" component={App}>
-            <Route path="/users" component={Users} />
-          </PrivateRoute>
-          <Route component={Error} />
-        </Switch>
+          <Route path="/" component={App} />
+        </Switch> */}
+        {router}
       </div>
     </ConnectedRouter>
   </Provider>,
