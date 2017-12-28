@@ -23,7 +23,7 @@ const routeRules = {
   ],
   check(path, isLogin, auth) {
     if (path === undefined || isLogin === undefined) {
-      throw ('参数不完整');
+      throw new Error('参数不完整');
     }
 
     const that = this;
@@ -33,7 +33,7 @@ const routeRules = {
     let isAuth = true;
     let redirectPath = '';
 
-    for (let i = 0; i < routers.length; i++) {
+    for (let i = 0; i < routers.length; i += 1) {
       if (path === routers[i].path) { // todo 考虑用正则匹配
         router = routers[i];
         break;
@@ -47,7 +47,7 @@ const routeRules = {
       } else if (!router.unLogin) { // 已登录但没有权限访问的路由
         isAuth = false;
         if (router.auth.length) {
-          for (let i = 0; i < router.auth.length; i++) {
+          for (let i = 0; i < router.auth.length; i += 1) {
             if (auth === router.auth[i]) {
               isAuth = true;
               break;

@@ -17,6 +17,24 @@ const ProjectService = {
   createProject(params) {
     return fetch.post('/project/addProject', params);
   },
+  getProjectDeatil(params) {
+    return fetch.post('/project/getProjectDetail', params);
+  },
+  addProjectUserRelation(params) {
+    return fetch.post('/project/addProjectUserRelation', params);
+  },
+  removeProjectUserRelation(params) {
+    return fetch.post('/project/removeProjectUserRelation', params);
+  },
+  makeOverProject(params) {
+    return fetch.post('/project/makeOverProject', params);
+  },
+  setStatus(params) {
+    return fetch.post('/project/setStatus', params);
+  },
+  editProject(params) {
+    return fetch.post('/project/editProject', params);
+  }
 };
 
 export default ProjectService;

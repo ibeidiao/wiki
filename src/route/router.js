@@ -27,10 +27,17 @@ class RouteWrap extends Component {
           if (typeof redirectTo === 'string') {
             return <Redirect to={redirectTo} />;
           }
-          if (!auth || (auth && auth(path))) {
+          if (!auth) {
             return <RouteComponent {...props} routes={routes} />;
+          } else {
+            const r = auth(path);
+            if (r.allowed) {
+              return <RouteComponent {...props} routes={routes} />;
+            } else if (r.to) {
+              return <Redirect to={r.to} />;
+            }
+            return null;
           }
-          return null;
         }}
       />
     );
@@ -43,13 +50,12 @@ const NotFound = () => {
 
 const routes = [
   {
-    path: '404',
+    path: 'NotFound',
     component: NotFound,
   },
   {
     path: 'login',
     component: Login,
-    auth: true,
   },
   {
     path: '',
@@ -62,12 +68,10 @@ const routes = [
       {
         path: 'users',
         component: User,
-        auth: true,
       },
       {
         path: 'departments',
         component: Department,
-        auth: true,
       },
       {
         path: 'projects',
@@ -87,10 +91,9 @@ const routes = [
 
 const auth = (path) => {
   if (path) {
-    return true;
+    return { allowed: false, to: '/login' };
   }
-  return false;
+  return true;
 };
 
-
-export default createRouter(mix404(routes, '404'), auth)(RouteWrap);
+export default createRouter(mix404(routes, 'NotFound'), auth)(RouteWrap);

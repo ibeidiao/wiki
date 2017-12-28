@@ -24,17 +24,21 @@ const createRoute = (route, auth, base, Route) => {
       path={url}
       auth={route.auth ? auth : false}
       component={route.component}
-      routes={createRouter(route.children, auth, url)(Route)}
+      routes={createRoutes(route.children, auth, url, Route)}
     />
   );
 };
 
-const createRouter = (routes, auth, base = '/') => (Route) => {
+const createRoutes = (routes, auth, base = '/', Route) => {
   return (
     <Switch>
       {routes.map(route => createRoute(route, auth, base, Route))}
     </Switch>
   );
+};
+
+const createRouter = (routes, auth, base = '/') => (Route) => {
+  return createRoutes(routes, auth, base, Route);
 };
 
 export const mix404 = (routes, path = 'NotFound') => {
