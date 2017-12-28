@@ -34,7 +34,7 @@ const ProjectService = {
   },
   editProject(params) {
     return fetch.post('/project/editProject', params);
-  }
+  },
 };
 
 export default ProjectService;

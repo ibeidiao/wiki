@@ -21,7 +21,7 @@ const UserService = {
   },
   getUserOptions(params) {
     return fetch.post('/user/getUserOptions', params);
-  }
+  },
 };
 
 export default UserService;
