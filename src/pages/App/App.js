@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import MyLayout from '../../contains/Layout/Layout';
 import Breadcrumb from '../../contains/Breadcrumb/Breadcrumb';
-
-import Department from '../Department/Department';
-import User from '../User/User';
-import Project from '../Project/Project';
-import CreateProject from '../CreateProject/CreateProject';
 
 import './app.less';
 
@@ -32,9 +26,11 @@ class App extends Component {
           <Content>
             <div className="content-header"><Breadcrumb /></div>
             <div className="content-body">
+              {/* {this.props.routes} */}
               {this.props.children}
             </div>
           </Content>
+          <Footer />
         </Layout>
       </Layout>
     );

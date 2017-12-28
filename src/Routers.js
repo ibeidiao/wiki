@@ -6,27 +6,35 @@ import Login from './pages/Login/Login';
 import App from './pages/App/App';
 import User from './pages/User/User';
 import Department from './pages/Department/Department';
+import Project from './pages/Project/Project';
+import CreateProject from './pages/CreateProject/CreateProject';
+import ProjectMoreActions from './pages/ProjectMoreActions/ProjectMoreActions';
 import PrivateRoute from './contains/PrivateRoute/PrivateRoute';
 
-const Project = () => (
-  <div>this is project</div>
-);
 
 const appChildren = [
   {
     path: '/departments',
     component: Department,
-    auth: true,
+    // auth: true,
   },
   {
     path: '/users',
     component: User,
-    auth: true,
+    // auth: true,
   },
   {
     path: '/projects',
     component: Project,
-    auth: true,
+    // auth: true,
+  },
+  {
+    path: '/projectMoreActions/:id',
+    component: ProjectMoreActions,
+  },
+  {
+    path: '/createProject',
+    component: CreateProject,
   },
   {
     path: '/',

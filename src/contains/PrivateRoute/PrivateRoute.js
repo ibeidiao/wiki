@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import authFn from './auth';
-import cookieUtils from '../../utils/cookie';
 
 class PrivateRoute extends Component {
   state = {
@@ -35,7 +34,12 @@ class PrivateRoute extends Component {
   }
 
   render() {
-    const { component, render, children, ...rest } = this.props;
+    const {
+      component,
+      render,
+      children,
+      ...rest,
+    } = this.props;
     const RouteComponent = component !== undefined ? component : render;
     const { path } = { ...rest };
     const redirectPath = path ? authFn.check(path, this.state.isLogin, this.state.auth).redirectPath : '';

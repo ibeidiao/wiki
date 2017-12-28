@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Card, Table, Button, Icon, Input, Checkbox } from 'antd';
+import { Card, Table, Button, Icon, Input, Checkbox, message } from 'antd';
 
 import ProjectService from '../../services/project.service';
 
@@ -129,12 +129,12 @@ class Project extends Component {
       {
         title: '操作',
         key: 'action',
-        render() {
+        render(item) {
           return (
             <span>
-              <button className="table-action-btn">编辑项目</button>
+              <button className="table-action-btn" onClick={() => message.warn('正在施工中...')} >编辑项目</button>
               <span className="ant-divider" />
-              <button className="table-action-btn">更多操作</button>
+              <Link className="table-action-btn" to={`/projectMoreActions/${item.id}`}>更多操作</Link>
             </span>
           );
         },

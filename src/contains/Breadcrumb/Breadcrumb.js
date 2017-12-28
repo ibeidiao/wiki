@@ -10,6 +10,8 @@ const breadcrumbNameMap = {
   '/users': '用户管理',
   '/projects': '项目列表',
   '/createProject': '创建项目',
+  '/departments': '部门列表',
+  '/projectMoreActions': '更多操作',
 };
 
 class BreadcrumbWrap extends Component {
