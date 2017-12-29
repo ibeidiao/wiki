@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import App from '../pages/App/App';
-import Login from '../pages/Login/Login';
-import Department from '../pages/Department/Department';
-import User from '../pages/User/User';
-import Project from '../pages/Project/Project';
-import CreateProject from '../pages/CreateProject/CreateProject';
-import ProjectMoreActions from '../pages/ProjectMoreActions/ProjectMoreActions';
+import App from '@pages/App/App';
+import Login from '@pages/Login/Login';
+import Department from '@pages/Department/Department';
+import User from '@pages/User/User';
+import Project from '@pages/Project/Project';
+import CreateProject from '@pages/CreateProject/CreateProject';
+import ProjectMoreActions from '@pages/ProjectMoreActions/ProjectMoreActions';
 
-import createRouter, { mix404 } from '../utils/createRouter';
+import createRouter, { mix404 } from '@utils/createRouter';
 
 class RouteWrap extends Component {
   render() {

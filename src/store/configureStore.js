@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger'; // 利用redux-logger打印日志
 import { createStore, applyMiddleware, compose } from 'redux'; // 引入redux createStore、中间件及compose
 import { routerMiddleware } from 'react-router-redux';
 
-import history from '../history';
+import history from '@/history';
 
 // 调用日志打印方法
 const loggerMiddleware = createLogger();

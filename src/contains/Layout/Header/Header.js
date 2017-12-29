@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout, Menu, Icon } from 'antd';
 
-import { controlSiderCollapsed } from '../../../actions/app';
+import { controlSiderCollapsed } from '@actions/app';
 
-import DropdownAvatar from '../../../components/DropdownAvatar/DropdownAvatar';
+import DropdownAvatar from '@components/DropdownAvatar/DropdownAvatar';
 
 import './header.less';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Icon } from 'antd';
 
-import AddUserForm from '../AddUserForm/AddUserForm';
+import AddUserForm from '@contains/AddUserForm/AddUserForm';
 
 class UserTableHeader extends Component {
   constructor() {

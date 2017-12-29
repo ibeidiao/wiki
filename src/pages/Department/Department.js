@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Table, Input, Button, Popconfirm, message, Icon } from 'antd';
-import UserTableHeader from '../../contains/UserTableHeader/UserTableHeader';
+import UserTableHeader from '@contains/UserTableHeader/UserTableHeader';
 
-import UserService from '../../services/user.service';
+import UserService from '@services/user.service';
 
 const { Search } = Input;
 

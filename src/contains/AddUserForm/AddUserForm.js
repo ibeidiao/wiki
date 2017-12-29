@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Icon, message } from 'antd';
 
-import UserService from '../../services/user.service';
+import UserService from '@services/user.service';
 
 const FormItem = Form.Item;
 

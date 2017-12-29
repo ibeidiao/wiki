@@ -1,4 +1,4 @@
-import { INCREASE, DECREASE, GETSUCCESS, REFRESHDATA } from '../constants';
+import { INCREASE, DECREASE, GETSUCCESS, REFRESHDATA } from '@/constants';
 
 // 这里的方法返回一个action对象
 export const increase = (n) => {

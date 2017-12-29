@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Input, Button, Icon, message } from 'antd';
 
-import ProjectService from '../../services/project.service';
+import ProjectService from '@services/project.service';
 
 const FormItem = Form.Item;
 

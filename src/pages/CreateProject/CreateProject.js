@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Card } from 'antd';
 
-import AddProjectFrom from '../../contains/AddProjectForm/AddProjectForm';
+import AddProjectFrom from '@contains/AddProjectForm/AddProjectForm';
 
 class CreateProject extends Component {
   render() {

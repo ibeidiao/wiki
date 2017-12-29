@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-import { API_PREFIX, API_SUFFIX } from '../constants';
+import { API_PREFIX, API_SUFFIX } from '@/constants';
 
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {

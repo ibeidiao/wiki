@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Card, Table, Input, Popconfirm, message, Icon } from 'antd';
 
-import UserTableHeader from '../../contains/UserTableHeader/UserTableHeader';
+import UserTableHeader from '@contains/UserTableHeader/UserTableHeader';
 
-import UserService from '../../services/user.service';
+import UserService from '@services/user.service';
 
 import './user.less';
 
