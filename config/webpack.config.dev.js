@@ -91,7 +91,7 @@ module.exports = {
       '@pages': `${paths.appSrc}/pages`,
       '@actions': `${paths.appSrc}/actions`,
       '@components': `${paths.appSrc}/components`,
-      '@contans': `${paths.appSrc}/contans`,
+      '@contains': `${paths.appSrc}/contains`,
       '@reducers': `${paths.appSrc}/reducers`,
       '@route': `${paths.appSrc}/route`,
       '@services': `${paths.appSrc}/services`,
