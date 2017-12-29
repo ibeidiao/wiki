@@ -87,7 +87,17 @@ module.exports = {
 
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
-      'react-native': 'react-native-web',
+      '@': paths.appSrc,
+      '@pages': `${paths.appSrc}/pages`,
+      '@actions': `${paths.appSrc}/actions`,
+      '@components': `${paths.appSrc}/components`,
+      '@contans': `${paths.appSrc}/contans`,
+      '@reducers': `${paths.appSrc}/reducers`,
+      '@route': `${paths.appSrc}/route`,
+      '@services': `${paths.appSrc}/services`,
+      '@store': `${paths.appSrc}/store`,
+      '@utils': `${paths.appSrc}/utils`,
+      '@react-native': 'react-native-web',
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -109,6 +119,7 @@ module.exports = {
       // It's important to do this before Babel processes the JS.
       {
         test: /\.(js|jsx|mjs)$/,
+        exclude: [`${paths.appSrc}/utils/editormd/editormd.min.js`, `${paths.appSrc}/utils/editormd/*/**.js`],
         enforce: 'pre',
         use: [
           {
