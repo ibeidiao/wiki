@@ -97,6 +97,7 @@ module.exports = {
       '@services': `${paths.appSrc}/services`,
       '@store': `${paths.appSrc}/store`,
       '@utils': `${paths.appSrc}/utils`,
+
       'react-native': 'react-native-web',
     },
     plugins: [
