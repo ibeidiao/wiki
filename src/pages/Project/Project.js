@@ -132,7 +132,10 @@ class Project extends Component {
         render(item) {
           return (
             <span>
-              <button className="table-action-btn" onClick={() => message.warn('正在施工中...')} >编辑项目</button>
+              {/*
+<button className="table-action-btn" onClick={() => message.warn('正在施工中...')} >编辑项目</button>
+              */}
+              <Link className="table-action-btn" to={`/projectEdit/${item.id}`}>编辑项目</Link>
               <span className="ant-divider" />
               <Link className="table-action-btn" to={`/projectMoreActions/${item.id}`}>更多操作</Link>
             </span>
