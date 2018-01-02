@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
-import moment from 'moment';
-
 import { Card, Row, Col, Table, Tooltip, Button, Icon, Popconfirm, Input, Select, message, Modal } from 'antd';
 
-// 引入语言包
-import 'moment/locale/zh-cn';
+import moment from '@utils/moment';
 
-import ProjectService from '../../services/project.service';
-import UserService from '../../services/user.service';
+import ProjectService from '@services/project.service';
+import UserService from '@services/user.service';
 
 import './project-more-actions.less';
-
-// 汉化 默认英语
-moment.locale('zh-cn');
 
 const { Search } = Input;
 
@@ -226,7 +220,6 @@ class ProjectMoreActions extends Component {
               <Popconfirm
                 title={`确定将该项目转给${item.nickName}（@${item.loginName}）？`}
                 onConfirm={() => {
-                  // console.log('操作成功');
                   const projectId = self.props.match.params.id;
                   ProjectService.makeOverProject({ projectId, relationId: item.id })
                     .then(({ meta }) => {
@@ -242,7 +235,6 @@ class ProjectMoreActions extends Component {
               <Popconfirm
                 title={`确定将用户${item.nickName}（@${item.loginName}）移出该项目？`}
                 onConfirm={() => {
-                  // console.log('操作成功');
                   ProjectService.removeProjectUserRelation({ id: item.id })
                     .then(({ meta }) => {
                       if (meta.errorNo === 0) {
@@ -342,9 +334,9 @@ class ProjectMoreActions extends Component {
           </Row>
           <Row gutter={16} className="row">
             <Col span={3} className="label-col">创建时间：</Col>
-            <Col span={9} className="content-col">{project.createTime === '--' ? '--' : moment(new Date(project.createTime)).format('YYYY-MM-DD HH:mm:ss')}</Col>
+            <Col span={9} className="content-col">{project.createTime === '--' ? '--' : moment(project.createTime).format('YYYY-MM-DD HH:mm:ss')}</Col>
             <Col span={3} className="label-col">最近更新时间：</Col>
-            <Col span={9} className="content-col">{project.createTime === '--' ? '--' : moment(new Date(project.modifyTime)).format('YYYY-MM-DD HH:mm:ss')}</Col>
+            <Col span={9} className="content-col">{project.createTime === '--' ? '--' : moment(project.modifyTime).format('YYYY-MM-DD HH:mm:ss')}</Col>
           </Row>
           <Row gutter={16} className="row">
             <Col span={3} className="label-col">项目描述：</Col>
@@ -356,8 +348,6 @@ class ProjectMoreActions extends Component {
                   style={{ minWidth: '300px' }}
                   type="textarea"
                   onChange={(e) => {
-                    console.log(self.state.editProject.id);
-                    console.log(self.state.editProject.name);
                     const p = {
                       id: self.state.editProject.id,
                       name: self.state.editProject.name,

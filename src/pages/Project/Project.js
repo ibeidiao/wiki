@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Card, Table, Button, Icon, Input, Checkbox, message } from 'antd';
+import { Card, Table, Button, Icon, Input, Checkbox, message, Tooltip } from 'antd';
 
-import ProjectService from '../../services/project.service';
+import moment from '@utils/moment';
+
+import ProjectService from '@services/project.service';
 
 import './project.less';
 
@@ -118,12 +120,16 @@ class Project extends Component {
         title: '创建日期',
         dataIndex: 'createTime',
         key: 'createTime',
+        render(createTime) {
+          return moment(createTime).format('YYYY-MM-DD HH:mm:ss');
+        }
       },
       {
         title: '最近一次更新',
         key: 'lastUpdate',
         render({ updaterName, modifyTime }) {
-          return <div>{`${updaterName}，${modifyTime}`}</div>;
+          const fromNow = moment(modifyTime).fromNow();
+          return <div>{` ${updaterName} 更新于 `}<Tooltip title={moment(modifyTime).format('YYYY-MM-DD HH:mm:ss')}>{fromNow}</Tooltip></div>;
         },
       },
       {

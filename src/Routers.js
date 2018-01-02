@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { ConnectedRouter } from 'react-router-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import Login from './pages/Login/Login';
-import App from './pages/App/App';
-import User from './pages/User/User';
-import Department from './pages/Department/Department';
-import Project from './pages/Project/Project';
-import CreateProject from './pages/CreateProject/CreateProject';
-import ProjectMoreActions from './pages/ProjectMoreActions/ProjectMoreActions';
-import ProjectEdit from './pages/ProjectEdit/ProjectEdit';
-import PrivateRoute from './contains/PrivateRoute/PrivateRoute';
+import Login from '@pages/Login/Login';
+import App from '@pages/App/App';
+import User from '@pages/User/User';
+import Department from '@pages/Department/Department';
+import Project from '@pages/Project/Project';
+import CreateProject from '@pages/CreateProject/CreateProject';
+import ProjectMoreActions from '@pages/ProjectMoreActions/ProjectMoreActions';
+import ProjectEdit from '@pages/ProjectEdit/ProjectEdit';
+
+import PrivateRoute from '@contains/PrivateRoute/PrivateRoute';
+
 
 const NotFind = () => (
   <div>404 not find</div>

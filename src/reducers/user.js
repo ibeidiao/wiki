@@ -1,4 +1,4 @@
-import { ADDLOGINCOUNT } from '../constants'; // 引入action类型常量名
+import { ADDLOGINCOUNT } from '@/constants'; // 引入action类型常量名
 
 // 初始化state数据
 const initialState = {
