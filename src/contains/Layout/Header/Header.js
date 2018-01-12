@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Button } from 'antd';
 
-import { controlSiderCollapsed } from '@actions/app';
+import cookie from '@utils/cookie';
+
+import { controlSiderCollapsed, getLoginUserInfo, logout } from '@actions/app';
 
 import DropdownAvatar from '@components/DropdownAvatar/DropdownAvatar';
+
+import analysis from '@utils/analysis';
 
 import './header.less';
 
 const { Header } = Layout;
 
 class HeaderWrap extends Component {
+  componentWillMount() {
+    this.props.getLoginUserInfo(analysis.getUserId());
+  }
+
+  handleLogout = () => {
+    const { history } = this.props;
+    this.props.logout();
+    cookie.del('token');
+    history.push('/login');
+  }
+
   render() {
     const menu = (
       <Menu style={{ textAlign: 'center' }}>
@@ -22,11 +37,13 @@ class HeaderWrap extends Component {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">退出登陆</a>
+          <a rel="noopener noreferrer" onClick={this.handleLogout}>退出登陆</a>
         </Menu.Item>
       </Menu>
     );
     const iconType = this.props.collapsed ? 'menu-unfold' : 'menu-fold';
+
+    const { nickName } = this.props.loginedUser;
 
     return (
       <Header className="header">
@@ -34,7 +51,7 @@ class HeaderWrap extends Component {
           <Icon type={iconType} style={{ fontSize: '24px', verticalAlign: 'middle', lineHeight: '64px' }} />
         </div>
         <div className="right">
-          <DropdownAvatar menu={menu} placement="bottomRight" className="action" size="small" icon="user" username="User" />
+          <DropdownAvatar menu={menu} placement="bottomRight" className="action" size="small" icon="user" username={nickName} />
         </div>
       </Header>
     );
@@ -44,6 +61,8 @@ class HeaderWrap extends Component {
 const mapStateToProps = (state) => {
   return {
     collapsed: state.app.collapsed,
+    loginedUser: state.app.loginedUser,
+    history: state.root.history,
   };
 };
 
@@ -52,6 +71,12 @@ const mapDispatchToProps = (dispatch) => {
     controlSiderCollapsed: (collapsed) => {
       dispatch(controlSiderCollapsed(collapsed));
     },
+    getLoginUserInfo: (id) => {
+      dispatch(getLoginUserInfo(id));
+    },
+    logout: () => {
+      dispatch(logout());
+    }
   };
 };
 

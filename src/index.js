@@ -20,12 +20,12 @@ const store = finalCreateStore(reducer);
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <ConnectedRouter history={history}>
+    <ConnectedRouter history={history}>
       <div>
         {router}
       </div>
-    </ConnectedRouter> */}
-    <Routers history={history} />
+    </ConnectedRouter>
+    {/* <Routers history={history} /> */}
   </Provider>,
   document.getElementById('root'),
 );

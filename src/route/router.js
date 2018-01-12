@@ -11,6 +11,8 @@ import ProjectMoreActions from '@pages/ProjectMoreActions/ProjectMoreActions';
 
 import createRouter, { mix404 } from '@utils/createRouter';
 
+import cookie from '@utils/cookie';
+
 class RouteWrap extends Component {
   render() {
     const {
@@ -60,6 +62,7 @@ const routes = [
   {
     path: '',
     component: App,
+    auth: true,
     children: [
       {
         path: '',
@@ -68,22 +71,27 @@ const routes = [
       {
         path: 'users',
         component: User,
+        auth: true,
       },
       {
         path: 'departments',
         component: Department,
+        auth: true,
       },
       {
         path: 'projects',
         component: Project,
+        auth: true,
       },
       {
         path: 'createProject',
         component: CreateProject,
+        auth: true,
       },
       {
         path: 'projectMoreActions/:id',
         component: ProjectMoreActions,
+        auth: true,
       },
     ],
   },
@@ -91,7 +99,12 @@ const routes = [
 
 const auth = (path) => {
   if (path) {
-    return { allowed: false, to: '/login' };
+    const token = cookie.get('token');
+    if (token) {
+      return { allowed: true };
+    } else {
+      return { allowed: false, to: '/login' };
+    }
   }
   return true;
 };

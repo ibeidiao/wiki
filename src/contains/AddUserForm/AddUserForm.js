@@ -19,9 +19,11 @@ class AddUserForm extends Component {
     UserService.addUser(user).then(({ meta }) => {
       if (meta.errorNo === 0) {
         message.success(meta.errorInfo);
-        this.handleCancel();
         this.props.onAddUser();
+      } else {
+        message.error(meta.errorInfo);
       }
+      this.handleCancel();
     });
   }
 

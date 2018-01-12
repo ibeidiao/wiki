@@ -24,10 +24,10 @@ class App extends Component {
         <Layout>
           <Header />
           <Content>
-            <div className="content-header"><Breadcrumb /></div>
+            {/* <div className="content-header"><Breadcrumb /></div> */}
             <div className="content-body">
-              {/* {this.props.routes} */}
-              {this.props.children}
+              {this.props.routes}
+              {/* {this.props.children} */}
             </div>
           </Content>
           <Footer />

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { Card, Table, Input, Popconfirm, message, Icon } from 'antd';
+import { Card, Table, Popconfirm, message } from 'antd';
+
+import SearchInput from '@components/SearchInput/SearchInput';
 
 import UserTableHeader from '@contains/UserTableHeader/UserTableHeader';
 
 import UserService from '@services/user.service';
 
 import './user.less';
-
-const { Search } = Input;
 
 class User extends Component {
   constructor() {
@@ -168,7 +168,6 @@ class User extends Component {
     const {
       filter, userList, loading, pagination,
     } = this.state;
-    const searchSuffix = filter ? <Icon className="search-input-clear" key="clear" type="close-circle" onClick={this.handleInputClear} /> : null;
     return (
       <Card style={{ width: '100%', marginBottom: '20px' }}>
         <div className="card-head-warpper">
@@ -186,13 +185,13 @@ class User extends Component {
             pagination={pagination}
             onChange={this.handleTableChange}
             title={() => (
-              <Search
+              <SearchInput
                 value={filter}
                 placeholder="请输入登录名／昵称／邮箱／手机"
-                suffix={searchSuffix}
                 style={{ width: '300px' }}
                 onChange={this.handleFilterChange}
                 onSearch={this.handleSearch}
+                onClear={this.handleInputClear}
               />
             )}
           />

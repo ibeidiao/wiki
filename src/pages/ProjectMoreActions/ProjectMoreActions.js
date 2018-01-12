@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { Card, Row, Col, Table, Tooltip, Button, Icon, Popconfirm, Input, Select, message, Modal } from 'antd';
+import { Card, Row, Col, Table, Tooltip, Button, Popconfirm, Input, Select, message, Modal, Tag, Badge } from 'antd';
 
 import moment from '@utils/moment';
+
+import SearchInput from '@components/SearchInput/SearchInput';
 
 import ProjectService from '@services/project.service';
 import UserService from '@services/user.service';
 
-import './project-more-actions.less';
+import analysis from '@utils/analysis';
 
-const { Search } = Input;
+import './project-more-actions.less';
 
 const { Option } = Select;
 
@@ -36,7 +38,7 @@ class ProjectMoreActions extends Component {
       userOptions: [],
       addMemberId: '',
       editing: false,
-      editProject: {}
+      editProject: {},
     };
   }
 
@@ -57,7 +59,7 @@ class ProjectMoreActions extends Component {
           project,
           allMemberList: memberList,
           currMemberList: memberList,
-          editProject
+          editProject,
         });
       }
     });
@@ -111,7 +113,11 @@ class ProjectMoreActions extends Component {
   }
 
   handleFilterClear = () => {
-    this.setState({ filter: '' });
+    const memberList = [...this.state.allMemberList];
+    this.setState({
+      filter: '',
+      currMemberList: memberList,
+    });
   }
 
   handleSelected = (key) => {
@@ -191,8 +197,11 @@ class ProjectMoreActions extends Component {
         render(item) {
           return (
             <div style={{ padding: '0 20px' }}>
-              <p><span style={{ fontWeight: '600' }}>{item.nickName}</span> @{item.loginName}</p>
-              <p style={{ cursor: 'default' }}>加入于 <Tooltip title={item.createTime}>{moment(item.createTime, 'YYYY-MM-DD hh:mm:ss').fromNow()}</Tooltip></p>
+              <div>
+                <span style={{ fontWeight: '600' }}>{item.nickName}</span> @{item.loginName}
+                { analysis.getUserId() === item.userId ? <Tag style={{ marginLeft: '10px' }} color="#1aaa55">这是你</Tag> : null }
+              </div>
+              <div style={{ cursor: 'default' }}>加入于 <Tooltip title={moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')}>{moment(item.createTime).fromNow()}</Tooltip></div>
             </div>
           );
         },
@@ -260,7 +269,6 @@ class ProjectMoreActions extends Component {
       editing,
       editProject,
     } = this.state;
-    const searchSuffix = filter ? <Icon className="search-input-clear" key="clear" type="close-circle" onClick={this.handleFilterClear} /> : null;
     const options = userOptions.map(item => <Option key={item.id} value={item.id.toString()}>{`${item.nickName} @${item.loginName}`}</Option>);
     let buttonG = null;
     if (editing) {
@@ -273,8 +281,8 @@ class ProjectMoreActions extends Component {
                 editProject: {
                   id: project.id,
                   name: project.name,
-                  description: project.description
-                }
+                  description: project.description,
+                },
               });
             }}
           >
@@ -310,18 +318,23 @@ class ProjectMoreActions extends Component {
                     const p = {
                       id: self.state.editProject.id,
                       name: e.target.value,
-                      description: self.state.editProject.description
+                      description: self.state.editProject.description,
                     };
                     this.setState({
-                      editProject: p
+                      editProject: p,
                     });
                   }}
                 />
-                （编号：{project.id}）
+                <Tag style={{ marginLeft: '10px' }}>{project.id}</Tag>
               </div>
             )
               :
-            `项目名称：${project.name}（编号：${project.id}）`
+            (
+              <div>
+                {`项目名称：${project.name}`}
+                <Tag style={{ marginLeft: '10px' }}>{project.id}</Tag>
+              </div>
+            )
           }
           extra={buttonG}
           style={{ marginBottom: '24px' }}
@@ -364,7 +377,7 @@ class ProjectMoreActions extends Component {
             </Col>
           </Row>
         </Card>
-        <Card title="成员管理" style={{ marginBottom: '20px' }}>
+        <Card title={<div><span style={{ verticalAlign: 'middle' }}>成员管理</span><Badge style={{ background: '#2e2e2e', marginLeft: '10px' }} count={this.state.allMemberList.length} /></div>} style={{ marginBottom: '20px' }}>
           <Table
             columns={columns}
             dataSource={currMemberList}
@@ -374,11 +387,10 @@ class ProjectMoreActions extends Component {
             title={(currentPageData) => {
               return (
                 <div style={{ display: 'flex' }}>
-                  {`项目总人数：${this.state.allMemberList.length}个, 符合条件${currentPageData.length}个`}
-                  <Search
+                  {`符合条件${currentPageData.length}个`}
+                  <SearchInput
                     value={filter}
                     placeholder="请输入昵称／账号"
-                    suffix={searchSuffix}
                     style={{
                       width: '300px',
                       paddingRight: 0,
@@ -387,6 +399,7 @@ class ProjectMoreActions extends Component {
                     }}
                     onChange={this.handleFilterChange}
                     onSearch={this.handleSearch}
+                    onClear={this.handleFilterClear}
                   />
                 </div>
               );

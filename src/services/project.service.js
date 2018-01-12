@@ -5,12 +5,12 @@ const PAGE_NUM = 1;
 
 const ProjectService = {
   getProjectList({
-    ownerId = '', filter = '', userId = 10034, pageNum = PAGE_NUM, pageSize = PAGE_SIZE,
+    ownerId = '', filter = '', pageNum = PAGE_NUM, pageSize = PAGE_SIZE,
   }) {
     return fetch.post(
       '/project/getProjectList',
       {
-        filter, ownerId, userId, pageNum, pageSize,
+        filter, ownerId, pageNum, pageSize,
       },
     );
   },

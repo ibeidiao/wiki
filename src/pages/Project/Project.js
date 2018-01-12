@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Card, Table, Button, Icon, Input, Checkbox, message, Tooltip } from 'antd';
+import { Card, Table, Button, Icon, Checkbox, message, Tooltip, Badge } from 'antd';
+
+import SearchInput from '@components/SearchInput/SearchInput';
 
 import moment from '@utils/moment';
 
 import ProjectService from '@services/project.service';
 
-import './project.less';
+import analysis from '@utils/analysis';
 
-const { Search } = Input;
+import './project.less';
 
 class Project extends Component {
   constructor() {
@@ -47,7 +49,7 @@ class Project extends Component {
   handleTableChange = (pagination) => {
     const { isOwned, filter, pagination: pager } = { ...this.state };
     pager.current = pagination.current;
-    const ownerId = isOwned ? 10038 : '';
+    const ownerId = isOwned ? analysis.getUserId() : '';
     this.setState({
       pagination: pager,
     });
@@ -66,7 +68,7 @@ class Project extends Component {
     const pager = { ...this.state.pagination };
     pager.current = 1;
     const { isOwned, filter } = this.state;
-    const ownerId = isOwned ? 10038 : '';
+    const ownerId = isOwned ? analysis.getUserId() : '';
     this.setState({
       pagination: pager,
     });
@@ -78,7 +80,7 @@ class Project extends Component {
     const pager = { ...this.state.pagination };
     pager.current = 1;
     const { isOwned } = this.state;
-    const ownerId = isOwned ? 10038 : '';
+    const ownerId = isOwned ? analysis.getUserId() : '';
     this.setState({
       pagination: pager,
       filter: '',
@@ -94,7 +96,7 @@ class Project extends Component {
       pagination: pager,
       isOwned: e.target.checked,
     });
-    const ownerId = e.target.checked ? 10038 : '';
+    const ownerId = e.target.checked ? analysis.getUserId() : '';
     const params = { pageNum: 1, ownerId };
     this._getProjectList(params);
   }
@@ -122,7 +124,7 @@ class Project extends Component {
         key: 'createTime',
         render(createTime) {
           return moment(createTime).format('YYYY-MM-DD HH:mm:ss');
-        }
+        },
       },
       {
         title: '最近一次更新',
@@ -140,7 +142,7 @@ class Project extends Component {
             <span>
               <button className="table-action-btn" onClick={() => message.warn('正在施工中...')} >编辑项目</button>
               <span className="ant-divider" />
-              <Link className="table-action-btn" to={`/projectMoreActions/${item.id}`}>更多操作</Link>
+              <Link className="table-action-btn" href={`/projectMoreActions/${item.id}`} to={`/projectMoreActions/${item.id}`}>更多操作</Link>
             </span>
           );
         },
@@ -154,12 +156,11 @@ class Project extends Component {
       pagination,
       isOwned,
     } = this.state;
-    const searchSuffix = filter ? <Icon className="search-input-clear" key="clear" type="close-circle" onClick={this.handleInputClear} /> : null;
 
     return (
       <Card style={{ width: '100%' }}>
         <div className="card-head-warpper">
-          <div className="card-head-title">项目列表</div>
+          <div className="card-head-title"><span style={{ verticalAlign: 'middle' }}>项目列表</span><Badge style={{ background: '#2e2e2e', marginLeft: '10px' }} count={pagination.total || 0} /></div>
           <div className="card-head-extra">
             <Link to="/createProject" href="/createProject"><Button type="dashed"><Icon style={{ marginRight: '10px' }} type="plus" />创建项目</Button></Link>
           </div>
@@ -175,13 +176,13 @@ class Project extends Component {
             title={() => (
               <div>
                 <Checkbox checked={isOwned} onChange={this.handleOwnCheckBoxChange} style={{ userSelect: 'none' }}>拥有的</Checkbox>
-                <Search
+                <SearchInput
                   value={filter}
                   placeholder="请输入项目名称／拥有者"
-                  suffix={searchSuffix}
                   style={{ width: '300px', paddingRight: 0, paddingLeft: 0 }}
                   onChange={this.handleFilterChange}
                   onSearch={this.handleSearch}
+                  onClear={this.handleInputClear}
                 />
               </div>
 

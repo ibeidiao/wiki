@@ -22,6 +22,12 @@ const UserService = {
   getUserOptions(params) {
     return fetch.post('/user/getUserOptions', params);
   },
+  login(params) {
+    return fetch.post('/user/login', params, { 'X-TimeStamp': new Date().getTime() });
+  },
+  getInfo(params) {
+    return fetch.post('/user/getInfo', params);
+  },
 };
 
 export default UserService;

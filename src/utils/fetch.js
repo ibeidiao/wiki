@@ -16,11 +16,13 @@ function parseJSON(response) {
   return response.json();
 }
 
-export const post = (url, params) => {
+export const post = (url, params, headers = {}) => {
   const data = {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
+      ...headers,
     },
     body: JSON.stringify(params),
   };

@@ -16,29 +16,32 @@ const appChildren = [
   {
     path: '/departments',
     component: Department,
-    // auth: true,
+    auth: true,
   },
   {
     path: '/users',
     component: User,
-    // auth: true,
+    auth: true,
   },
   {
     path: '/projects',
     component: Project,
-    // auth: true,
+    auth: true,
   },
   {
     path: '/projectMoreActions/:id',
     component: ProjectMoreActions,
+    auth: true,
   },
   {
     path: '/createProject',
     component: CreateProject,
+    auth: true,
   },
   {
     path: '/',
     redirectTo: '/users',
+    auth: true,
   },
 ];
 
