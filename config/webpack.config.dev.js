@@ -120,7 +120,7 @@ module.exports = {
       // It's important to do this before Babel processes the JS.
       {
         test: /\.(js|jsx|mjs)$/,
-        exclude: [`${paths.appSrc}/utils/editormd/editormd.min.js`, `${paths.appSrc}/utils/editormd/*/**.js`],
+        exclude: [`${paths.appSrc}/utils/mditor/mditor.js`, `${paths.appSrc}/utils/mditor/*.js`],
         enforce: 'pre',
         use: [
           {
@@ -223,6 +223,23 @@ module.exports = {
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },
+          },
+          {
+            test: require.resolve('jquery'),
+            use: [{
+              loader: 'expose-loader',
+              options: 'jQuery',
+            }, {
+              loader: 'expose-loader',
+              options: '$',
+            }],
+          },
+          {
+            test: require.resolve('zepto'),
+            use: [{
+              loader: 'expose-loader',
+              options: 'Zepto',
+            }],
           },
         ],
       },

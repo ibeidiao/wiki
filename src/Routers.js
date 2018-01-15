@@ -9,8 +9,14 @@ import Department from '@pages/Department/Department';
 import Project from '@pages/Project/Project';
 import CreateProject from '@pages/CreateProject/CreateProject';
 import ProjectMoreActions from '@pages/ProjectMoreActions/ProjectMoreActions';
+import ProjectEdit from '@pages/ProjectEdit/ProjectEdit';
+
 import PrivateRoute from '@contains/PrivateRoute/PrivateRoute';
 
+
+const NotFind = () => (
+  <div>404 not find</div>
+);
 
 const appChildren = [
   {
@@ -47,9 +53,17 @@ const appChildren = [
 
 const routers = [
   {
+    path: '/404',
+    component: NotFind,
+  },
+  {
     path: '/login',
     component: Login,
     auth: false,
+  },
+  {
+    path: '/projectEdit/:id',
+    component: ProjectEdit,
   },
   {
     path: '/',
@@ -59,52 +73,65 @@ const routers = [
   },
 ];
 
+const pushRouteNotFind = (routes) => {
+  routes.push({
+    path: '*',
+    redirectTo: '/404',
+  });
+  return routes;
+};
+
 class Routers extends Component {
-  createRoute(Parent, _children, props) {
-    const { redirectTo, ...rest } = props;
+  createRoute(route, key) {
+    const {
+      auth,
+      redirectTo,
+      children,
+      ...rest
+    } = route;
 
     if (redirectTo) {
-      return (<Parent {...rest} exact render={() => <Redirect to={{ pathname: redirectTo }} />} />);
+      return (
+        <Route key={key} exact render={() => <Redirect to={{ pathname: redirectTo }} />} />
+      );
     }
 
-    if (_children && _children.length) {
+    let MyRoute = null;
+
+    if (auth) {
+      MyRoute = PrivateRoute;
+    } else {
+      MyRoute = Route;
+    }
+
+    if (children && children.length) {
       return (
-        <Parent {...props} >
-          {_children.map(({
-              auth, children, ..._rest
-            }, key) => {
-              const _props = { key, ..._rest };
-              if (auth) {
-                return (this.createRoute(PrivateRoute, children, _props));
-              } else {
-                return (this.createRoute(Route, children, _props));
-              }
-            })}
-        </Parent>
+        <MyRoute key={key} {...rest}>
+          {this.createRoutes(pushRouteNotFind(children))}
+        </MyRoute>
       );
     } else {
-      return (<Parent {...props} exact />);
+      return (
+        <MyRoute key={key} exact {...rest} />
+      );
     }
+  }
+
+  createRoutes(routes) {
+    return (
+      <Switch>
+        {routes.map((route, key) => {
+          return this.createRoute(route, key);
+        })}
+      </Switch>
+    );
   }
 
   render() {
     return (
       <ConnectedRouter history={this.props.history}>
         <div>
-          {this.createRoute(Switch, routers, {})}
-          {/** todo 不传Switch */}
-          {/* <Switch>
-            {routers.map(({
-              path, component, exact, auth,
-            }) => {
-              const _props = { path, component, exact };
-              if (auth) {
-                return (<PrivateRoute {..._props} />);
-              } else {
-                return (<Route {..._props} />);
-              }
-            })}
-          </Switch> */}
+          {this.createRoutes(routers)}
         </div>
       </ConnectedRouter>
     );
