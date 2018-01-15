@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 import utils from '@utils/utils';
-import Mditor1 from '@utils/mditor/mditor';
-import '@utils/mditor/css/mditor.css';
+import 'mditor/dist/js/mditor';
+import 'mditor/dist/css/mditor.css';
 
-const mditor = null;
+// const mditor = null;
 
 class Editormd extends Component {
   componentDidMount() {
@@ -26,7 +26,7 @@ class Editormd extends Component {
         title: '保存',
         key,
         handler() {
-          alert(111);
+          console.log(111);
         },
       });
     });

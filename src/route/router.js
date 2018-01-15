@@ -7,6 +7,7 @@ import Department from '@pages/Department/Department';
 import User from '@pages/User/User';
 import Project from '@pages/Project/Project';
 import CreateProject from '@pages/CreateProject/CreateProject';
+import ProjectEdit from '@pages/ProjectEdit/ProjectEdit';
 import ProjectMoreActions from '@pages/ProjectMoreActions/ProjectMoreActions';
 
 import createRouter, { mix404 } from '@utils/createRouter';
@@ -58,6 +59,11 @@ const routes = [
   {
     path: 'login',
     component: Login,
+  },
+  {
+    path: 'projectEdit/:id',
+    component: ProjectEdit,
+    auth: true
   },
   {
     path: '',
