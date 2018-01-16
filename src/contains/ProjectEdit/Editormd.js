@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 // import $ from 'jquery';
 
 import utils from '@utils/utils';
-import 'mditor/dist/js/mditor';
-import 'mditor/dist/css/mditor.css';
+import Mditor from 'mditor/src/client/index';
 
 // const mditor = null;
 
@@ -14,7 +13,6 @@ class Editormd extends Component {
 
   mditorInit() {
     const textarea = document.getElementById('editor');
-    const { Mditor } = window;
     const mditor = Mditor.fromTextarea(textarea);
     mditor.on('ready', () => {
       console.log(mditor.value);

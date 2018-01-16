@@ -208,6 +208,11 @@ module.exports = {
               }
             ],
           },
+          // mditor loader by xianyu
+          {
+            test: /mditor\/src\/.*\/.*.html$/,
+            loader: 'raw-loader'
+          },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
           // In production, they would get copied to the `build` folder.
@@ -223,23 +228,6 @@ module.exports = {
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },
-          },
-          {
-            test: require.resolve('jquery'),
-            use: [{
-              loader: 'expose-loader',
-              options: 'jQuery',
-            }, {
-              loader: 'expose-loader',
-              options: '$',
-            }],
-          },
-          {
-            test: require.resolve('zepto'),
-            use: [{
-              loader: 'expose-loader',
-              options: 'Zepto',
-            }],
           },
         ],
       },
