@@ -24,7 +24,7 @@ class ProjectBasicInfo extends Component {
         createTime: '--',
         modifyTime: '--',
         description: '--',
-      }
+      },
     };
   }
 
@@ -68,6 +68,8 @@ class ProjectBasicInfo extends Component {
         message.success(meta.errorInfo);
         this.setState({ editing: false });
         this._loadData();
+      } else {
+        message.error(meta.errorInfo);
       }
     });
   }
@@ -84,6 +86,8 @@ class ProjectBasicInfo extends Component {
             if (meta.errorNo === 0) {
               message.success(meta.errorInfo);
               self._loadData();
+            } else {
+              message.error(meta.errorInfo);
             }
           });
       },
@@ -102,6 +106,8 @@ class ProjectBasicInfo extends Component {
             if (meta.errorNo === 0) {
               message.success(meta.errorInfo);
               self._loadData();
+            } else {
+              message.error(meta.errorInfo);
             }
           });
       },

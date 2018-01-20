@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Row, Col, Table, Tooltip, Button, Popconfirm, Input, Select, message, Modal, Tag, Badge } from 'antd';
+import { Card, Table, Tooltip, Button, Popconfirm, Select, message, Tag, Badge } from 'antd';
 
 import moment from '@utils/moment';
 
@@ -15,10 +15,6 @@ import analysis from '@utils/analysis';
 import './project-more-actions.less';
 
 const { Option } = Select;
-
-const { confirm } = Modal;
-
-const ButtonGroup = Button.Group;
 
 class ProjectMoreActions extends Component {
   constructor() {
@@ -171,6 +167,8 @@ class ProjectMoreActions extends Component {
                       if (meta.errorNo === 0) {
                         message.success('转让成功！');
                         self._loadPageData();
+                      } else {
+                        message.error(meta.errorInfo);
                       }
                     });
                 }}
@@ -180,11 +178,14 @@ class ProjectMoreActions extends Component {
               <Popconfirm
                 title={`确定将用户${item.nickName}（@${item.loginName}）移出该项目？`}
                 onConfirm={() => {
-                  ProjectService.removeProjectUserRelation({ id: item.id })
+                  const projectId = self.props.match.params.id;
+                  ProjectService.removeProjectUserRelation({ id: item.id, projectId })
                     .then(({ meta }) => {
                       if (meta.errorNo === 0) {
                         message.success('移除成功！');
                         self._loadPageData();
+                      } else {
+                        message.error(meta.errorInfo);
                       }
                     });
                 }}
